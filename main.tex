@@ -1,0 +1,248 @@
+% 	This template is  MIT licensed.
+
+% 	Basic file to demonstrate the usage of this LaTeX template.
+% 	You can build your own paper/thesis on top of this file.
+% 	Simply adjust the document class and all metadata and start working.
+%
+\documentclass[
+	language=german, % set to english or german
+	type=master, % set to bachelor, master or seminar
+]{isthesis}
+
+% Graphics rendering using TikZ
+% See: https://en.wikibooks.org/wiki/LaTeX/PGF/TikZ
+\usepackage{tikz}
+% Include required TikZ libraries here, some exemplary libraries are pre-included
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+
+%Add your library here
+\addbibresource{library.bib}
+
+% Import acronyms
+\input{config/acronyms}
+
+% Import symbols
+\input{config/symbols}
+
+% Import custom commands
+\input{config/commands}
+
+% Document meta information
+\isthesis{
+    title={\(\Gamma\)-Konvergenz},
+    sub-title={Anwendung in Phasenübergängen},
+    author-name={Christopher Sorg}, % Separate multiple authors with commas
+    author-email={chr.sorg@fau.de},
+    principal-supervisor={Prof. Dr. Manuel Friedrich}, % This must be a professor
+    group={Lehrstuhl für angewandte Mathematik 1 (Angewandte Analysis)},
+    group-institute={Department Mathematik},
+    studies={M.Sc. Mathematik (Analysis und Stochastik)},
+    %associate-group={}, % When the thesis is done in cooperation with another chair, add it here
+    %associate-group-institute={}, % add cooperating institute or university here
+    submission-date={2023-09-19}, % The date you handed in your document: Format yyyy-mm-dd
+    primary-logo={assets/fau-nat-digital.jpg}, % Uses the FAU logo by default
+    primary-logo-height={22mm}, % Uses 16mm as default height
+    %secondary-logo={}
+    secondary-logo-height={0mm} % Uses 16mm as default height
+}
+
+\hypersetup{colorlinks, citecolor = fau-grey, linkcolor = blue}
+%\geometry{left=2cm}
+%\geometry{right=2cm}
+\begin{document}
+    % Title page
+    \newcounter{savepage}
+    \maketitle
+
+	% Quote
+    % You can put an optional quote page in front of your content
+    %   \quotepage[author={Arthur C. Clarke}]{
+    %   	        Any sufficiently advanced technology is indistinguishable from magic.
+    %   }
+    \begin{abstract}
+	    % Add your abstract here:
+		In dieser Arbeit wird das Konzept der {\(\Gamma\)}-Konvergenz auf Phasenübergänge angewandt. Hierbei wird ein grundlegendes Mathematik-Niveau eines Masterstudenten erwartet. Unübliche Vertiefungen werden im zweiten Kapitel eingeführt. Notwendiges Vorwissen umfasst hierbei die Vorlesungen Funktionalanalysis, konvexe Analysis, (geometrische) Maßtheorie, partielle Differentialgleichungen und Topologie. Für ein besseres intuitives Verständnis ist ein solides stochastisches Vorwissen von großem Vorteil.
+	\end{abstract}
+    
+    % Table of contents
+    \tableofcontents
+
+    % List of tables (if you have tables)
+    %\listoftables
+    
+    % List of listings (if you have listings)
+	%\lstlistoflistings
+
+    % List of abbreviations (if you use acronyms)
+    %\listofabbreviations
+
+    % List of symbols (if you use symbols)
+    %\listofsymbols
+	
+	% Abstract
+	%
+	% Comment out this part, if you don't require an abstract
+
+	
+	% storing the last pagenumber
+    \setcounter{savepage}{\value{page}}
+    
+    
+    % Content
+    \begin{content}
+        % Add your content files:
+        \input{sections/00_Einleitung}
+		\input{sections/01_Einf}
+		\input{sections/02_Gamma}
+		\input{sections/03_GamPhase}
+		\input{sections/04_GamLith}
+        \input{sections/05_Schluss}
+    \end{content}
+    
+    \pagenumbering{Roman}
+    \setcounter{page}{\numexpr\value{savepage}}
+
+    % List of figures (if you have figures)
+    \listoffigures{}
+    
+    % References
+    \references{}
+    
+    % Appendix
+     \begin{appendix}
+        % In the appendices, use \section{} instead of \chapter{}
+      %   \input{appendices/appendix}
+      Dieser Anhang dient dazu, Theoreme aufzuführen, die einem erweiterten Umfang der Grundlagenvorlesungen angehören, also eventuell für die angedachte Zielleserschaft unbekannt sind. Die Beweise zu den Theoremen sind in der jeweiligen Quelle zu finden.\\
+      \section{Reelle Analysis}
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.1}}}
+\textbf{Anhang A.1 (Rademacher, Notation aus \cite{EvansMeaTh}[Seite 81-84: Theorem 2]):} Angenommen, \(f \in Lip_{loc}(\mathbb{R}^n,\mathbb{R}^N)\). Dann ist f \(\lambda^n\)-f.ü. klassisch differenzierbar.
+\end{minipage}}
+      \section{Geometrische Maßtheorie}
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.2}}}
+\textbf{Anhang A.2 (Lusin, Notation aus \cite{EvansMeaTh}[Seite 15-16: Theorem 2]):} Sei \((\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n),\mu)\) ein Maßraum und \(\mu\) regulär (i.e. von innnen und außen regulär). Betrachte \(\mu \text{-messbare } f:\mathbb{R}^n \to \mathbb{R}^N\) und \(A \subset \mathbb{R}^n\). Angenommen, \(\mu(A) < \infty\). Sei zudem \(\epsilon > 0\) beliebig, aber fest. Dann existiert ein Kompaktum \(K \subset A\), sodass gilt:
+\begin{enumerate}
+    \item \(\mu(A \, \textbackslash \, K) < \epsilon\),
+    \item f ist stetig auf K.
+\end{enumerate}
+\end{minipage}}
+
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.3}}}
+\textbf{Anhang A.3 (Vitali 1908, \cite{zbMATH02639907}, Notation aus \cite{EvansMeaTh}[Seite 27-29: Theorem 1, Corollary 2]):} Sei \(\mathcal{V}\) eine Menge an nicht-entarteten abgeschlossenen Bällen B in \(\mathbb{R}^n\) mit:
+\begin{equation}
+    \sup \{diam B \, | \, B \in \mathcal{V}\} < \infty,
+\end{equation}
+dann existiert eine \textbf{abzählbare} Familie \(\mathcal{G}\) an disjunkten abgeschlossenen Bällen B in \(\mathcal{V}\), sodass gilt:
+\begin{equation}
+    \bigcup_{B \in \mathcal{V}} B \subset \bigcup_{B \in \mathcal{G}} \tilde{B},
+\end{equation}
+wobei \(\tilde{B}\) der Ball B mit fünffachen Radius ist. Demzufolge erhalten wir als wichtigen Spezialfall:\\
+Für eine (bezüglich der euklidischen Relativtopologie) offene Menge \(\Omega \subset \mathbb{R}^n\) existiert solch ein \(\mathcal{G}\), sodass für ein beliebiges, aber festes \(\delta > 0\) \(diam B \leq \delta\) für alle \(B \in \mathcal{G}\) und:
+\begin{equation}
+    \lambda^n(\Omega \, \textbackslash \, \bigcup_{B \in \mathcal{G}} B) = 0
+\end{equation}
+gilt.
+\end{minipage}}
+\newpage
+        \section{Wahrscheinlichkeitstheorie}
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.4}}}
+\textbf{Anhang A.4 (Prokhorov, \cite{prokRand}[Seite 167--170]):} Sei \(\mathcal{H}\) eine beschränkte, nicht-negative Teilmenge von \(\mathcal{M}(A)\), die folgende Enge-Bedingung erfüllt:
+\begin{equation}
+    \forall \epsilon > 0 \, \exists \text{ kompakte Teilmengen }K_{\epsilon} \text{ von }A \, : \, \sup\{\mu (A \, \textbackslash \, K_{\epsilon}) \, | \, \mu \in \mathcal{H}\} \leq \epsilon. 
+\end{equation}
+Dann ist \(\mathcal{H}\) folgenkompakt bezüglich der Einschränkungs-Topologie.
+\end{minipage}}\\
+
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{korA.5}}}
+\textbf{Anhang A.5 (Prokhorov für Young-Maße, \cite{AttouchCalcVar}[Seite 142]):} Sei \(\{\vartheta_n\}_{n \in \mathbb{N}} \subset \Y\), welche die Enge-Bedingung erfüllt. Dann existiert \(\{\vartheta_{n_k}\}_{k \in \mathbb{N}}\), sodass gilt:
+\begin{equation}
+    \vartheta_{n_k} \stackrel{nar}{\rightharpoonup} \vartheta \in \Y.
+\end{equation}
+\end{minipage}}
+        \section{Topologie}
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.6}}}
+\textbf{Anhang A.6 (Tychonoff, \cite{wright1994tychonoff}):} Sei \(\{(X,\mathcal{T})_i\}_{i \in I}\) eine Familie kompakter topologischer Räume. Dann ist auch \((\bigtimes_{i \in I} X_i, \mathcal{T}_{pr})\) kompakt.
+\end{minipage}}\\
+
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{defA.7}}}
+\textbf{Anhang A.7 (Kolmogorov Klassifizierung topologischer Räume):} Sei \((X,\mathcal{T})\) ein topologischer Raum. Dann kann man diesen nach seiner Trennungseigenschaft klassifizieren: Wir nennen \(X\) einen...
+\begin{itemize}
+    \item (T0)-Raum (Kolmogorov), falls
+    \begin{equation}
+        \forall x,y \in X, \, x \neq y \, \exists N \in \mathcal{T} \, : \, (((x \in N) \, \land \, (y \notin N)) \, \veebar \, ((x \notin N) \, \land \, (y \in N)))
+    \end{equation}
+    gilt.
+    \item (T1)-Raum (Frechet), falls Ein-Punktmengen abgeschlossen sind bezüglich \(\mathcal{T}\).
+    \item (T2)-Raum (Hausdorff), falls \(X\) die Hausdorff-Eigenschaft trägt.
+    \item (T2.5)-Raum (Urysohn), falls \(X\) die Hausdorff-Eigenschaft bezüglich abgeschlossenen Umgebungen trägt.
+    \item (T3)-Raum (Regulär Hausdorff), falls \(X\) (T2) und regulär ist.
+    \item (T3.5)-Raum (Tychonoff), falls
+    \begin{equation}
+        \forall x \in X \, \forall \text{ Umgebungen }U_x \in \mathcal{T} \, \exists f \in C(X,[0,1]) \, \forall y \in U^c_x \, : \, (f(x) = 0 \, \land f(y) = 1)
+    \end{equation}
+    gilt.
+\end{itemize}
+\end{minipage}}
+\newpage
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{defA.7b}}}
+\begin{itemize}
+    \item (T4)-Raum (Normal Hausdorff), falls \(X\) (T1) und normal ist.
+    \item (T5)-Raum (Vollständig normal Hausdorff), falls \(X\) (T4) und vollständig ist.
+    \item (T6)-Raum (Perfekt normal Hausdorff), falls \(X\) (T4) und perfekt ist, i.e. es gilt:
+    \begin{equation}
+        \forall A, B \subset X, \, A \cap B = \emptyset \, \exists f \in C(X,[0,1]) \, : \, (f^{-1}(0) = A \, \land \, f^{-1}(1) = B).
+    \end{equation}
+\end{itemize}
+\end{minipage}}
+
+        \section{Regularitätstheorie}
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.8}}}
+\textbf{Anhang A.8 (Existenz und Erhaltung analytischer Eigenschaften nicht-linearer inverser Operatoren, \cite{roubivcek2013nonlinear}[Theorem 2.14]):} Sei \(B\) ein seperabler, reflexiver Banachraum, \(A:B \to B^*\) ein beschränkter, radial stetiger (i.e. \(t \mapsto <A(u+tv),v>\) ist stetig für alle \(u,v \in B\)), monotoner und Norm-koerziver Operator. Dann gilt:
+\begin{enumerate}
+    \item \(A\) ist surjektiv.
+    \item Ist \(A\) sogar strikt monoton, so ist \(A\) auch injektiv, i.e. \(A^{-1} : B^* \to B\) existiert. \(A^{-1}\) ist dabei sogar strikt monoton, beschränkt und demistetig.
+\end{enumerate}
+\end{minipage}}\\
+
+\pgfsetfillopacity{0.1}\colorbox{generalYellow}{\begin{minipage}{16cm}{\textcolor{black}{\pgfsetfillopacity{1}}{\label{theoA.9}}}
+\textbf{Anhang A.9 (Kompaktheitssatz von Aubin-Lions-Simon, \cite{simon1986compact}[Theorem 5], Original in Französisch in \cite{simon1978ecoulement}):} Seien \(X,Y,B\) Banachräume mit:
+\begin{itemize}
+    \item \(X \subset B \subset Y\),
+    \item \(X \stackrel{cpt}{\hookrightarrow} B\),
+\end{itemize}
+sowie \(p \in [1,\infty]\). Angenommen es ist:
+\begin{enumerate}
+    \item \(\mathcal{U} \subset L^p(0,T,X)\) beschränkt und
+    \item \(\mathbb{T}_h(f) \stackrel{h \to 0}{\to} f\) in \(L^p(0,T-h,Y)\) gleichmäßig für \(f \in \mathcal{U}\),
+\end{enumerate}
+wobei \(\mathbb{T}_h\) der Translationsoperator für \(f\) auf \([-h,T-h]\) ist, i.e. \((\mathbb{T}_h f)(t) := f(t+h)\) für alle \(h > 0\).
+Dann ist \(\mathcal{U}\) relativ-kompakt in \(L^p(0,T,B)\), sowie in \(C([0,T],B)\) für \(p = \infty\).
+\end{minipage}}
+     
+     
+     
+     \end{appendix}
+     
+
+
+
+
+    % Declaration of authorship
+    % \authorshipstatement[pagenumbering=false]
+    \authorshipstatement[pagenumbering=true]
+    % \authorshipstatement[pagenumbering=only]
+    
+    % Consent form for use of plagiarism detection software
+    % Not yet required
+    % \consentform[pagenumbering=false]
+    % \consentform[pagenumbering=true]
+    % \consentform[pagenumbering=only]
+    
+    % Bonus: Wordcount
+    % cd %FOLDER WHERE THE .tex FILES ARE IN %
+    % clear
+    % texcount -total -q -col -sum *.tex
+    
+\end{document}
